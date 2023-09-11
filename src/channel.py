@@ -20,6 +20,34 @@ class Channel:
         self.video_count = self.channel_info["items"][0]["statistics"]["videoCount"]
         self.channel_views = self.channel_info["items"][0]["statistics"]["viewCount"]
 
+    def __str__(self):
+        """Magic method __str__ initializing"""
+        return f"{self.title} ({self.url})"
+
+    def __add__(self, other):
+        """Magic + method"""
+        return int(self.channel_subs_count) + int(other.channel_subs_count)
+
+    def __sub__(self, other):
+        """Magic - method"""
+        return int(self.channel_subs_count) - int(other.channel_subs_count)
+
+    def __gt__(self, other):
+        """Magic > method"""
+        return int(self.channel_subs_count) > int(other.channel_subs_count)
+
+    def __ge__(self, other):
+        """Magic >= method"""
+        return int(self.channel_subs_count) >= int(other.channel_subs_count)
+
+    def __lt__(self, other):
+        """Magic < method"""
+        return int(self.channel_subs_count) < int(other.channel_subs_count)
+
+    def __le__(self, other):
+        """Magic <= method"""
+        return int(self.channel_subs_count) <= int(other.channel_subs_count)
+
     def print_info(self) -> None:
         """Выводит в консоль информацию о канале."""
         channel = self.get_service().channels().list(id=self.channel_id,
