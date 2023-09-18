@@ -47,6 +47,7 @@ class PLVideo:
         self.real_pl_id = self.pl_info["items"][0]["id"]
 
     def __str__(self):
+        """str method initializing"""
         return f"{self.title}"
 
     @staticmethod
