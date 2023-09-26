@@ -3,16 +3,30 @@ from googleapiclient.discovery import build
 
 
 class Video:
-    """Video class initializing"""
+    """Video class initializing with exception broken video id"""
 
     def __init__(self, video_id):
         self.video_id = video_id
-        self.video_info = self.get_video_info()
-        self.title = self.video_info["items"][0]["snippet"]["title"]
-        self.url = "https://www.youtube.com/watch?v=" + self.video_id
-        self.video_views = self.video_info["items"][0]["statistics"]["viewCount"]
-        self.video_likes_count = self.video_info["items"][0]["statistics"]["likeCount"]
-        self.real_video_id = self.video_info["items"][0]["id"]
+        try:
+            self.video_info = self.get_video_info()
+            self.title = self.video_info["items"][0]["snippet"]["title"]
+
+        except IndexError:
+            print(f"Неверно указан id видео")
+            self.video_info = None
+            self.title = None
+            self.url = None
+            self.video_views = None
+            self.video_likes_count = None
+            self.real_video_id = None
+
+        else:
+            self.video_info = self.get_video_info()
+            self.title = self.video_info["items"][0]["snippet"]["title"]
+            self.url = "https://www.youtube.com/watch?v=" + self.video_id
+            self.video_views = self.video_info["items"][0]["statistics"]["viewCount"]
+            self.video_likes_count = self.video_info["items"][0]["statistics"]["likeCount"]
+            self.real_video_id = self.video_info["items"][0]["id"]
 
     def __str__(self):
         """str method initializing"""
