@@ -21,8 +21,6 @@ class Video:
             self.real_video_id = None
 
         else:
-            self.video_info = self.get_video_info()
-            self.title = self.video_info["items"][0]["snippet"]["title"]
             self.url = "https://www.youtube.com/watch?v=" + self.video_id
             self.video_views = self.video_info["items"][0]["statistics"]["viewCount"]
             self.video_likes_count = self.video_info["items"][0]["statistics"]["likeCount"]
